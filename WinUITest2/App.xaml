@@ -1,0 +1,24 @@
+<!-- Copyright (c) Microsoft Corporation and Contributors. -->
+<!-- Licensed under the MIT License. -->
+
+<Application
+    x:Class="WinUITest2.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WinUITest2">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+                <ResourceDictionary Source="/Themes/DefaultSkin.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="CommonControl.xaml"></ResourceDictionary>
+                <!-- Other merged dictionaries here -->
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Other app resources here -->
+            <FontFamily x:Key="iconfont">/Assets/iconfont.ttf#iconfont</FontFamily>
+            <local:NegativeConverter x:Key="NegativeConverter"/>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

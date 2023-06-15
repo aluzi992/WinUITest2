@@ -1,0 +1,108 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--
+    所有通用控件（ListBox、TreeView）中的item，鼠标悬浮、选定时的背景定义
+    “蓝天白云”（我自己做的）主题：
+    悬浮：#eff6fc
+    选定：#cfe7fd
+    fbb3b3
+    ffc9c9
+    -->
+    <SolidColorBrush x:Key="MouseHoverBackgroundBrush" Color="#FFFFE8B6"></SolidColorBrush>
+    <SolidColorBrush x:Key="SelectedBackgroundBrush" Color="#FFF79393"></SolidColorBrush>
+    <SolidColorBrush x:Key="SelectedAndHoverBorderBrush" Color="#FFff6767"></SolidColorBrush>
+    <SolidColorBrush x:Key="SmallTabWithSliderSelectedForeground" Color="#e55454"></SolidColorBrush>
+
+    <!--在主题色上的文字的颜色-->
+    <SolidColorBrush x:Key="MainThemeTextColor" Color="#FFF"></SolidColorBrush>
+    <SolidColorBrush x:Key="SkinedTextColor" Color="#FFE84848"></SolidColorBrush>
+    <SolidColorBrush x:Key="MainTabIconText" Color="#fff"></SolidColorBrush>
+    
+    <!--我的工作页面，左边的背景-->
+    <SolidColorBrush x:Key="MyWorkPageLeftBackground" Color="#FFFFF5E5"></SolidColorBrush>
+
+    <!--聊天窗口，左边部分的会话清单样式-->
+    <SolidColorBrush x:Key="IMChatListSelectedBackgroundBrush" Color="#bf3d3d"></SolidColorBrush>
+    <SolidColorBrush x:Key="IMChatListMouseHoverBackgroundBrush" Color="#d66d5f" Opacity="0.5"></SolidColorBrush>
+    <SolidColorBrush x:Key="IMChatListUserNameBrush" Color="#fff"></SolidColorBrush>
+    <SolidColorBrush x:Key="IMChatListTimeBrush" Color="#ef8d8d"></SolidColorBrush>
+    <SolidColorBrush x:Key="IMChatListMessageBrush" Color="#ef8d8d"></SolidColorBrush>
+
+    <!--聊天窗口右边部分背景（由两部分构成），这个是图案
+    <SolidColorBrush x:Key="ChatFormBackgroundRight" Color="#fff"></SolidColorBrush>
+    -->
+    <ImageBrush x:Key="ChatFormBackgroundRight" Stretch="None" AlignmentX="Right" AlignmentY="Top" ImageSource="/Images/guoqing/chat.png"></ImageBrush>
+    <!--这个是底色，要纯色背景-->
+    <SolidColorBrush x:Key="ChatFormBackgroundRight2" Color="#faf5f5"></SolidColorBrush>
+
+    <!--聊天窗口左边部分背景-->
+    <SolidColorBrush x:Key="ChatFormBackgroundLeft" Color="#9d1414"></SolidColorBrush>
+
+    <!--首页的主题背景色，以及鼠标悬浮时的背景色-->
+    <SolidColorBrush x:Key="InfoissueSkinColorBrush" Color="#9d1414"></SolidColorBrush>
+    <!--鼠标悬浮背景色，适用于浅色文字-->
+    <SolidColorBrush x:Key="InfoissueSkinHoverColorBrushLightText" Color="#3998e2"></SolidColorBrush>
+    <!--鼠标悬浮背景色，适用于黑色文字-->
+    <SolidColorBrush x:Key="InfoissueSkinHoverColorBrush" Color="#f2f2f2"></SolidColorBrush>
+    <SolidColorBrush x:Key="InfoissueItemHoverBrush" Color="#eff6fc"></SolidColorBrush>
+    <SolidColorBrush x:Key="InfoissueLabelTextBrush" Color="#333"></SolidColorBrush>
+    <SolidColorBrush x:Key="InfoissueItemTextBrush" Color="#333"></SolidColorBrush>
+    <!--ListView标题栏背景样式-->
+    <SolidColorBrush x:Key="SkinListViewColumnHeader" Color="#fafafa" Opacity="0.5"></SolidColorBrush>
+
+
+    <!--主界面页签内容（TabItem里面的内容）背景-->
+    <SolidColorBrush x:Key="MainTabBackground" Color="White" Opacity="1"></SolidColorBrush>
+
+    <!--主窗口背景-->
+    <ImageBrush x:Key="MainWindowBackground" ImageSource="/Images/guoqing/home.png" Stretch="Uniform" AlignmentY="Top" AlignmentX="Left"></ImageBrush>
+
+    <!--登录界面左边背景-->
+    <ImageBrush x:Key="LoginFormBackgroundLeft" ImageSource="/Images/guoqing/login.png" Stretch="Fill"></ImageBrush>
+
+    <!--主界面页签图标-->
+    <ImageBrush x:Key="MainTabIcon01" ImageSource="/Images/ClassicBlue/首页.png"></ImageBrush>
+    <ImageBrush x:Key="MainTabIcon02" ImageSource="/Images/ClassicBlue/我的工作.png"></ImageBrush>
+    <ImageBrush x:Key="MainTabIcon03" ImageSource="/Images/ClassicBlue/工作页面.png"></ImageBrush>
+    <ImageBrush x:Key="MainTabIcon04" ImageSource="/Images/ClassicBlue/通讯录.png"></ImageBrush>
+    <ImageBrush x:Key="MainTabIcon05" ImageSource="/Images/ClassicBlue/日程管理.png"></ImageBrush>
+    <ImageBrush x:Key="MainTabIcon06" ImageSource="/Images/ClassicBlue/邮件.png"></ImageBrush>
+    <!--鼠标悬浮时图标的背景-->
+    <Color x:Key="MainTabIconHoverColor">#C8D75C5C</Color>
+    <!--鼠标选定时图标的背景-->
+    <SolidColorBrush x:Key="MainTabIconSelectedBrush" Color="#b42323" Opacity="0.8"></SolidColorBrush>
+    <!--
+        <VisualBrush x:Key="MainTabIcon05" Stretch="None">
+        <VisualBrush.Visual>
+            <TextBlock Background="Transparent" Foreground="#FF94D666" Style="{StaticResource iconfont}" FontSize="32">&#xe642;</TextBlock>
+        </VisualBrush.Visual>
+    </VisualBrush>
+    -->
+
+    <!--主界面用户名、部门的文字颜色-->
+    <SolidColorBrush x:Key="HomeUserNameColor" Color="#fff"></SolidColorBrush>
+
+    <!--Skin按钮的背景色和前景色-->
+    <SolidColorBrush x:Key="SkinButtonBackgroundBrush" Color="#FFD64841"></SolidColorBrush>
+    <Color x:Key="SkinButtonHoverBackground">#F2644C</Color>
+    <SolidColorBrush x:Key="SkinButtonBrush" Color="#fff"></SolidColorBrush>
+
+    <Style x:Key="PicNewTitleBox" TargetType="Border">
+        <Setter Property="Height" Value="28"></Setter>
+        <Setter Property="VerticalAlignment" Value="Bottom"></Setter>
+        <Setter Property="Padding" Value="10 0 0 0"></Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="#000" Opacity="0.3"></SolidColorBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="PicNewTitleBoxTextBlock" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="#fafafa"></Setter>
+        <Setter Property="FontSize" Value="14"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+    </Style>
+    
+</ResourceDictionary>

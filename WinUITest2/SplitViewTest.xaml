@@ -1,0 +1,313 @@
+﻿<!-- Copyright (c) Microsoft Corporation and Contributors. -->
+<!-- Licensed under the MIT License. -->
+
+<Window
+    x:Class="WinUITest2.SplitViewTest"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WinUITest2"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid>
+        <Grid.Resources>
+            <Style x:Key="IconAndTextListViewItemStyle0" TargetType="ListViewItem">
+                <Setter Property="TabNavigation" Value="Local" />
+                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                <Setter Property="UseSystemFocusVisuals" Value="False" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListViewItem">
+                            <Grid x:Name="LayoutRoot" Background="LightSlateGray">
+                                <Grid.RenderTransform>
+                                    <TranslateTransform x:Name="MainGridTranslate" X="0"/>
+                                </Grid.RenderTransform>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="SpecialStates">
+                                        <VisualState x:Name="Deleting">
+                                            <Storyboard>
+                                                <!--必须是ActualWidth，调试的时候通过“实时可视化树”可以看到，控件都没有Width属性，只有ActualWidth-->
+                                                <DoubleAnimation To="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth, Converter={StaticResource NegativeConverter}}" Duration="0:0:0.3" Storyboard.TargetName="MainGridTranslate" Storyboard.TargetProperty="X"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState x:Name="Disabled"/>
+                                        <VisualState x:Name="PointerOver">
+                                            <VisualState.Setters>
+                                                <Setter Target="LayoutRoot.Background" Value="OrangeRed"/>
+                                                <Setter Target="ContentPresenter.LabelContent.Visibility" Value="Collapsed"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed"/>
+                                        <VisualState x:Name="Selected"/>
+                                        <VisualState x:Name="SelectedUnfocused"/>
+                                        <VisualState x:Name="SelectedPointerOver">
+                                            <VisualState.Setters>
+                                                <Setter Target="LayoutRoot.Background" Value="{StaticResource InfoissueItemHoverBrush}"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="SelectedPressed"/>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <ContentPresenter x:Name="ContentPresenter" ContentTransitions="{TemplateBinding ContentTransitions}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                Content="{TemplateBinding Content}"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Margin="0"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="IconAndTextListViewItemStyle" TargetType="ListViewItem">
+                <Setter Property="TabNavigation" Value="Local" />
+                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                <Setter Property="UseSystemFocusVisuals" Value="False" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListViewItem">
+                            <Grid x:Name="LayoutRoot" Background="Ivory">
+                                <Grid.RenderTransform>
+                                    <TranslateTransform x:Name="MainGridTranslate" X="0"/>
+                                </Grid.RenderTransform>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="28"></ColumnDefinition>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="SpecialStates">
+                                        <VisualState x:Name="Deleting">
+                                            <Storyboard>
+                                                <!--必须是ActualWidth，调试的时候通过“实时可视化树”可以看到，控件都没有Width属性，只有ActualWidth-->
+                                                <DoubleAnimation To="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth, Converter={StaticResource NegativeConverter}}" Duration="0:0:0.3" Storyboard.TargetName="MainGridTranslate" Storyboard.TargetProperty="X"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState x:Name="Disabled"/>
+                                        <VisualState x:Name="PointerOver">
+                                            <VisualState.Setters>
+                                                <Setter Target="LayoutRoot.Background" Value="{StaticResource InfoissueItemHoverBrush}"/>
+                                                <Setter Target="TopPin.Visibility" Value="Collapsed"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed"/>
+                                        <VisualState x:Name="Selected"/>
+                                        <VisualState x:Name="SelectedUnfocused"/>
+                                        <VisualState x:Name="SelectedPointerOver">
+                                            <VisualState.Setters>
+                                                <Setter Target="LayoutRoot.Background" Value="{StaticResource InfoissueItemHoverBrush}"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="SelectedPressed"/>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <TextBlock HorizontalAlignment="Center" Name="TopPin" Foreground="{ThemeResource SkinedTextColor}" Text="{Binding Icon}" FontFamily="{StaticResource iconfont}" VerticalAlignment="Center"></TextBlock>
+                                <TextBlock Grid.Column="1" Text="{Binding Text}" VerticalAlignment="Center"></TextBlock>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="IconAndTextListBoxItemStyle" TargetType="ListBoxItem">
+                <Setter Property="TabNavigation" Value="Local" />
+                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                <Setter Property="UseSystemFocusVisuals" Value="False" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListBoxItem">
+                            <Grid x:Name="LayoutRoot" Background="CornflowerBlue" BorderThickness="0" Padding="0,10,12,10">
+                                <Grid.RenderTransform>
+                                    <TranslateTransform x:Name="MainGridTranslate" X="0"/>
+                                </Grid.RenderTransform>
+                                <VisualStateManager.VisualStateGroups>
+                                    
+                                    <VisualStateGroup x:Name="SpecialStates">
+                                        <VisualState x:Name="Deleting">
+                                            <Storyboard>
+                                                <!--必须是ActualWidth，调试的时候通过“实时可视化树”可以看到，控件都没有Width属性，只有ActualWidth-->
+                                                <DoubleAnimation To="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth, Converter={StaticResource NegativeConverter}}" Duration="0:0:0.3" Storyboard.TargetName="MainGridTranslate" Storyboard.TargetProperty="X"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                    
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState x:Name="Disabled"/>
+                                        <VisualState x:Name="PointerOver">
+                                            <VisualState.Setters>
+                                                <Setter Target="LayoutRoot.Background" Value="{StaticResource InfoissueItemHoverBrush}"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed"/>
+                                        <VisualState x:Name="Selected"/>
+                                        <VisualState x:Name="SelectedUnfocused"/>
+                                        <VisualState x:Name="SelectedPointerOver">
+                                            <VisualState.Setters>
+                                                <Setter Target="LayoutRoot.Background" Value="{StaticResource InfoissueItemHoverBrush}"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="SelectedPressed"/>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20"></ColumnDefinition>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock HorizontalAlignment="Center" Name="TopPin" Foreground="OrangeRed" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Icon}" FontFamily="{StaticResource iconfont}"></TextBlock>
+                                <TextBlock Grid.Column="1" Text="{Binding Text}"></TextBlock>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <DataTemplate x:Key="IconAndTextTemplate" x:DataType="local:IconAndTextLabel">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="28"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Name="TopPin" Foreground="{ThemeResource SkinedTextColor}" Text="{x:Bind Icon}" FontFamily="{StaticResource iconfont}" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Text}"></TextBlock>
+                </Grid>
+            </DataTemplate>
+
+            <DataTemplate x:Key="TableListViewItemStyle" x:DataType="local:IconAndTextLabel">
+                <Grid Padding="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="180"></ColumnDefinition>
+                        <ColumnDefinition Width="208"></ColumnDefinition>
+                        <ColumnDefinition Width="82"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Fill="LightBlue"/>
+                    <TextBlock HorizontalAlignment="Center" Name="TopPin" Foreground="{ThemeResource SkinedTextColor}" Text="{x:Bind Text}" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Text}"></TextBlock>
+                    <TextBlock Grid.Column="2" Text="{x:Bind Text}"></TextBlock>
+                </Grid>
+            </DataTemplate>
+
+        </Grid.Resources>
+
+        <Button Content="Test button" Click="Button_Click">
+            <Button.ContextFlyout>
+                <MenuFlyout Placement="Bottom">
+                    <MenuFlyoutItem Text="阿里山的空间爱上了打开" Tag="x101"></MenuFlyoutItem>
+                    <MenuFlyoutItem Text="嗯哦欸爱丽丝的" Tag="x102"></MenuFlyoutItem>
+                </MenuFlyout>
+            </Button.ContextFlyout>
+        </Button>
+        <ListView Name="listView1" ItemContainerStyle="{StaticResource ListViewItemExpanded}" SelectionChanged="listView1_SelectionChanged" ItemsSource="{x:Bind Items}" VerticalAlignment="Top">
+            <ListView.ItemContainerTransitions>
+                <TransitionCollection>
+                    <AddDeleteThemeTransition/>
+                </TransitionCollection>
+            </ListView.ItemContainerTransitions>
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:IconAndTextLabel">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="28"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock HorizontalAlignment="Center" Name="TopPin" Foreground="{ThemeResource SkinedTextColor}" Text="{x:Bind Icon}" FontFamily="{StaticResource iconfont}" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock Grid.Column="1" Text="{x:Bind Text}" VerticalAlignment="Center"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackPanel VerticalAlignment="Bottom">
+        <SymbolIcon Symbol="Send" Foreground="Green"/>
+            <SymbolIcon Symbol="Mail" Foreground="Green"/>
+            <SymbolIcon Symbol="MailFilled" Foreground="Green"/>
+            <SymbolIcon Symbol="MailForward" Foreground="Green"/>
+            <SymbolIcon Symbol="Delete" Foreground="Green"/>
+            <SymbolIcon Symbol="Send" Foreground="Green"/>
+            <FontIcon Glyph="&#xE838;" Foreground="Green"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Background="Ivory" VerticalAlignment="Bottom">
+            <RadioButton Style="{StaticResource IconOnlyRadioButtonStyle}" Tag="&#xe6fa;" FontSize="28" Margin="0,0,8,0"/>
+            <RadioButton Style="{StaticResource IconOnlyRadioButtonStyle}" Tag="&#xe613;" FontSize="28"/>
+        </StackPanel>
+        <FontIcon Glyph="&#xe604;" FontFamily="{StaticResource iconfont}" FontSize="20" HorizontalAlignment="Center"/>
+        <SymbolIcon Symbol="Folder" HorizontalAlignment="Center" Margin="40,0,0,0"/>
+        <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8b7;" Foreground="OrangeRed" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,20,20"/>
+        <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8d5;" Foreground="Gold" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,20,20"/>
+        <Grid Width="300" Height="300" >
+            <Image Stretch="UniformToFill" Source="ms-appx:///D:/photo/20190906大理之行/20190908_145619.jpg" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+        <!--        
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:IconAndTextLabel">
+                    <Grid PointerEntered="Grid_PointerEntered" PointerExited="Grid_PointerExited">
+                        <TextBlock x:Name="TopPin" Foreground="{ThemeResource SkinedTextColor}" Text="{Binding Icon}" FontFamily="{StaticResource iconfont}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock x:Name="LabelContent" Grid.Column="1" Margin="20,0,0,0" Text="{Binding Text}" VerticalAlignment="Center"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        <ItemsRepeater ItemsSource="{x:Bind Items}">
+            <ItemsRepeater.ItemTemplate>
+                <DataTemplate x:DataType="local:IconAndTextLabel">
+                    <ListViewItem Style="{StaticResource IconAndTextListViewItemStyle}"/>
+                </DataTemplate>
+            </ItemsRepeater.ItemTemplate>
+        </ItemsRepeater>
+                <SplitView IsPaneOpen="True" OpenPaneLength="200" DisplayMode="Inline">
+            <SplitView.Pane>
+                <ItemsRepeater ItemsSource="{x:Bind Items}">
+                    <ItemsRepeater.ItemTemplate>
+                        <DataTemplate x:DataType="local:IconAndTextLabel">
+                            <ListViewItem Style="{StaticResource IconAndTextListViewItemStyle}"/>
+                        </DataTemplate>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+            </SplitView.Pane>
+
+            <StackPanel>
+                <Grid Height="42" Background="#fff" BorderThickness="0,0,0,1" BorderBrush="Red">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="180"></ColumnDefinition>
+                        <ColumnDefinition Width="208"></ColumnDefinition>
+                        <ColumnDefinition Width="82"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Fill="Yellow"/>
+                    <TextBlock HorizontalAlignment="Center" Name="TopPin" Foreground="{ThemeResource SkinedTextColor}" Text="日期" VerticalAlignment="Center"></TextBlock>
+                    <Rectangle Width="1" Height="30" Fill="Green" HorizontalAlignment="Right"/>
+
+                    <TextBlock VerticalAlignment="Center" Grid.Column="1" Text="作者" Margin="4,0,0,0"></TextBlock>
+                    <Rectangle Grid.Column="1" Width="1" Height="30" Fill="Green" HorizontalAlignment="Right"/>
+
+                    <TextBlock VerticalAlignment="Center" Grid.Column="2" Text="标题" Margin="4,0,0,0"></TextBlock>
+                </Grid>
+                <ListView ItemsSource="{x:Bind Items}" Padding="0" ItemTemplate="{StaticResource TableListViewItemStyle}"/>
+            </StackPanel>
+        </SplitView>
+        <local:BINPersonPicture2 Background="MediumSeaGreen" PortraitUrl="{x:Bind TestImageUrl}" Width="100" Height="100" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                 PersonName="Lily" ErrorPlaceholder="/Assets/portrait.jpg"/>
+        <local:BINPersonPicture2 Background="Orange" PortraitUrl="{x:Bind TestImageUrl2}" Width="100" Height="100" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                                 PersonName="Tom" ErrorPlaceholder="/Assets/portrait.jpg"/>
+
+        <ListBox Name="listBox1" ItemContainerStyle="{StaticResource IconAndTextListBoxItemStyle}" ItemsSource="{x:Bind Items}">
+            <ListBox.ItemContainerTransitions>
+                <TransitionCollection>
+                    <AddDeleteThemeTransition/>
+                </TransitionCollection>
+            </ListBox.ItemContainerTransitions>
+        </ListBox>
+        <local:BINCircleImage/>
+        <ListView ItemContainerStyle="{StaticResource IconAndTextListViewItemStyle}" ItemsSource="{x:Bind Items}" SelectionChanged="ListView_SelectionChanged"/>
+         ItemTemplate="{StaticResource IconAndTextTemplate}" 
+        <ListBox ItemContainerStyle="{StaticResource IconAndTextListBoxItemStyle}" ItemsSource="{x:Bind Items}" SelectionChanged="ListView_SelectionChanged"/>
+        -->
+    </Grid>
+</Window>

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "WinUIWndProc (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "WinUIWndProc (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
